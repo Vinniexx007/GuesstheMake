@@ -123,11 +123,49 @@ class CarLogoQuiz {
             isGameActive: true
         };
 
-        // Show game screen
+        // Reset any animation classes
+        this.resetAnimations();
+
+        // Show game screen with transition
         this.showScreen('game');
+        
+        // Add entrance animation to game screen
+        setTimeout(() => {
+            const gameContainer = this.elements.gameScreen.querySelector('.container');
+            gameContainer.style.animation = 'fadeIn 0.5s ease-out forwards';
+        }, 100);
         
         // Start first round
         this.nextRound();
+    }
+
+    resetAnimations() {
+        // Remove animation classes from elements
+        const elementsToReset = [
+            this.elements.finalScore.parentElement,
+            this.elements.resultsScreen.querySelector('.container'),
+            this.elements.resultsScreen.querySelector('.title'),
+            this.elements.playAgainBtn,
+            this.elements.shareBtn,
+            this.elements.newRecord
+        ];
+        
+        elementsToReset.forEach(element => {
+            if (element) {
+                element.classList.remove(
+                    'results-entrance', 'celebration-text', 'button-bounce', 
+                    'trophy-animation', 'perfect-score', 'score-count-animation'
+                );
+                element.style.animation = '';
+                element.style.fontSize = '';
+            }
+        });
+        
+        // Reset stats animations
+        const statElements = this.elements.resultsScreen.querySelectorAll('.stat');
+        statElements.forEach(stat => {
+            stat.classList.remove('stat-slide-in');
+        });
     }
 
     showScreen(screenName) {
@@ -366,10 +404,16 @@ class CarLogoQuiz {
             btn.disabled = true;
         });
         
-        // Show correct answer
+        // Show correct answer with enhanced animation
         this.elements.answerBtns.forEach(btn => {
             if (btn.dataset.country === this.gameState.currentQuestion.correctAnswer) {
                 btn.classList.add('correct');
+                // Add extra celebration for correct answers
+                if (isCorrect) {
+                    setTimeout(() => {
+                        this.createMiniCelebration(btn);
+                    }, 200);
+                }
             }
         });
         
@@ -378,13 +422,54 @@ class CarLogoQuiz {
             selectedBtn.classList.add('incorrect');
         }
         
-        // Show streak indicator if there's a streak
+        // Show streak indicator with enhanced animation
         if (this.gameState.currentStreak >= this.config.streakThreshold) {
             this.elements.streakCount.textContent = this.gameState.currentStreak;
             this.elements.streakIndicator.classList.remove('hidden');
+            
+            // Add fire emoji based on streak length
+            let streakEmoji = '🔥';
+            if (this.gameState.currentStreak >= 6) streakEmoji = '🔥🔥';
+            if (this.gameState.currentStreak >= 9) streakEmoji = '🔥🔥🔥';
+            
+            this.elements.streakIndicator.innerHTML = `${streakEmoji} <span id="streak-count">${this.gameState.currentStreak}</span> streak!`;
+            
             setTimeout(() => {
                 this.elements.streakIndicator.classList.add('hidden');
             }, 1000);
+        }
+    }
+
+    createMiniCelebration(buttonElement) {
+        const colors = ['#4caf50', '#ffd700', '#ff6b6b'];
+        const rect = buttonElement.getBoundingClientRect();
+        
+        for (let i = 0; i < 8; i++) {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.left = rect.left + rect.width/2 + 'px';
+            particle.style.top = rect.top + rect.height/2 + 'px';
+            particle.style.width = '6px';
+            particle.style.height = '6px';
+            particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '1000';
+            
+            const angle = (i / 8) * Math.PI * 2;
+            const velocity = 50 + Math.random() * 30;
+            const vx = Math.cos(angle) * velocity;
+            const vy = Math.sin(angle) * velocity;
+            
+            particle.style.animation = `miniParticle 0.8s ease-out forwards`;
+            particle.style.setProperty('--vx', vx + 'px');
+            particle.style.setProperty('--vy', vy + 'px');
+            
+            document.body.appendChild(particle);
+            
+            setTimeout(() => {
+                document.body.removeChild(particle);
+            }, 800);
         }
     }
 
@@ -403,12 +488,6 @@ class CarLogoQuiz {
         // Calculate final stats
         const accuracy = Math.round((this.gameState.correctAnswers / this.config.totalRounds) * 100);
         
-        // Update results UI
-        this.elements.finalScore.textContent = this.gameState.score;
-        this.elements.accuracy.textContent = accuracy + '%';
-        this.elements.correctAnswersSpan.textContent = `${this.gameState.correctAnswers}/${this.config.totalRounds}`;
-        this.elements.maxStreakSpan.textContent = this.gameState.maxStreak;
-        
         // Check for new best score
         const isNewRecord = this.saveBestScore(this.gameState.score);
         if (!isNewRecord) {
@@ -418,8 +497,148 @@ class CarLogoQuiz {
         // Update best score display
         this.loadBestScore();
         
-        // Show results screen
+        // Show results screen with animation
         this.showScreen('results');
+        
+        // Start end game animations
+        setTimeout(() => {
+            this.triggerEndGameAnimations(accuracy, isNewRecord);
+        }, 300);
+    }
+
+    triggerEndGameAnimations(accuracy, isNewRecord) {
+        // Add entrance animation to results screen
+        const resultsContainer = this.elements.resultsScreen.querySelector('.container');
+        resultsContainer.classList.add('results-entrance');
+        
+        // Create confetti if good performance (70%+ accuracy or new record)
+        if (accuracy >= 70 || isNewRecord) {
+            this.createConfetti();
+        }
+        
+        // Animate score counting
+        this.animateScoreCount();
+        
+        // Create fireworks for exceptional performance
+        if (accuracy >= 90 || this.gameState.correctAnswers === this.config.totalRounds) {
+            setTimeout(() => this.createFireworks(), 1000);
+            
+            // Add perfect score shine effect
+            if (this.gameState.correctAnswers === this.config.totalRounds) {
+                this.elements.finalScore.parentElement.classList.add('perfect-score');
+            }
+        }
+        
+        // Animate stats with staggered timing
+        this.animateStats();
+        
+        // Animate buttons
+        setTimeout(() => {
+            this.elements.playAgainBtn.classList.add('button-bounce');
+            setTimeout(() => {
+                this.elements.shareBtn.classList.add('button-bounce');
+            }, 200);
+        }, 1500);
+        
+        // Add trophy animation for new records
+        if (isNewRecord) {
+            setTimeout(() => {
+                this.elements.newRecord.style.fontSize = '1.2rem';
+                this.elements.newRecord.classList.add('trophy-animation');
+            }, 800);
+        }
+        
+        // Add celebration text animation for title
+        setTimeout(() => {
+            const title = this.elements.resultsScreen.querySelector('.title');
+            title.classList.add('celebration-text');
+        }, 500);
+    }
+
+    createConfetti() {
+        const confettiContainer = document.createElement('div');
+        confettiContainer.className = 'confetti';
+        document.body.appendChild(confettiContainer);
+        
+        const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ffd700', '#ff9ff3', '#54a0ff'];
+        
+        for (let i = 0; i < 50; i++) {
+            setTimeout(() => {
+                const confettiPiece = document.createElement('div');
+                confettiPiece.className = 'confetti-piece';
+                confettiPiece.style.left = Math.random() * 100 + '%';
+                confettiPiece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confettiPiece.style.animationDelay = Math.random() * 2 + 's';
+                confettiPiece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                
+                // Random shapes
+                if (Math.random() > 0.5) {
+                    confettiPiece.style.borderRadius = '50%';
+                } else {
+                    confettiPiece.style.transform = 'rotate(45deg)';
+                }
+                
+                confettiContainer.appendChild(confettiPiece);
+            }, i * 50);
+        }
+        
+        // Remove confetti after animation
+        setTimeout(() => {
+            document.body.removeChild(confettiContainer);
+        }, 5000);
+    }
+
+    createFireworks() {
+        for (let i = 0; i < 5; i++) {
+            setTimeout(() => {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = Math.random() * 80 + 10 + '%';
+                firework.style.top = Math.random() * 60 + 20 + '%';
+                
+                document.body.appendChild(firework);
+                
+                setTimeout(() => {
+                    document.body.removeChild(firework);
+                }, 1000);
+            }, i * 400);
+        }
+    }
+
+    animateScoreCount() {
+        const finalScoreElement = this.elements.finalScore;
+        const targetScore = this.gameState.score;
+        let currentScore = 0;
+        const increment = Math.max(1, Math.floor(targetScore / 50));
+        
+        finalScoreElement.textContent = '0';
+        finalScoreElement.classList.add('score-count-animation');
+        
+        const countInterval = setInterval(() => {
+            currentScore += increment;
+            if (currentScore >= targetScore) {
+                currentScore = targetScore;
+                clearInterval(countInterval);
+            }
+            finalScoreElement.textContent = currentScore;
+        }, 30);
+        
+        // Update other stats after score animation
+        setTimeout(() => {
+            const accuracy = Math.round((this.gameState.correctAnswers / this.config.totalRounds) * 100);
+            this.elements.accuracy.textContent = accuracy + '%';
+            this.elements.correctAnswersSpan.textContent = `${this.gameState.correctAnswers}/${this.config.totalRounds}`;
+            this.elements.maxStreakSpan.textContent = this.gameState.maxStreak;
+        }, 1000);
+    }
+
+    animateStats() {
+        const statElements = this.elements.resultsScreen.querySelectorAll('.stat');
+        statElements.forEach((stat, index) => {
+            setTimeout(() => {
+                stat.classList.add('stat-slide-in');
+            }, 200 * (index + 1));
+        });
     }
 
     shareScore() {

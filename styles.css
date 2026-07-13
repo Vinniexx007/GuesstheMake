@@ -423,6 +423,213 @@ button:focus {
     outline-offset: 2px;
 }
 
+/* Confetti Animation */
+.confetti {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.confetti-piece {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #f39c12;
+    animation: confetti-fall 3s linear forwards;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* Score Count Animation */
+.score-count-animation {
+    animation: scoreCount 2s ease-out forwards;
+}
+
+@keyframes scoreCount {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Trophy Animation */
+.trophy-animation {
+    animation: trophyBounce 1s ease-in-out infinite alternate;
+}
+
+@keyframes trophyBounce {
+    0% {
+        transform: scale(1) rotate(-5deg);
+    }
+    100% {
+        transform: scale(1.1) rotate(5deg);
+    }
+}
+
+/* Results Screen Animation */
+.results-entrance {
+    animation: resultsEntrance 0.8s ease-out forwards;
+}
+
+@keyframes resultsEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+    }
+    60% {
+        transform: translateY(-10px) scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Celebration Text Animation */
+.celebration-text {
+    animation: celebrationPulse 2s ease-in-out infinite;
+    background: linear-gradient(45deg, #ffd700, #ff6b6b, #4ecdc4, #45b7d1);
+    background-size: 400% 400%;
+    animation: celebrationPulse 2s ease-in-out infinite, gradientShift 3s ease-in-out infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+@keyframes celebrationPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Firework Animation */
+.firework {
+    position: fixed;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.firework::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    box-shadow: 
+        0 0 0 3px #ff6b6b,
+        0 0 0 6px #4ecdc4,
+        0 0 0 9px #ffd700,
+        0 0 0 12px #ff9ff3,
+        0 0 0 15px #54a0ff;
+    animation: fireworkExplosion 1s ease-out forwards;
+}
+
+@keyframes fireworkExplosion {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+/* Slide in animations for stats */
+.stat-slide-in {
+    animation: statSlideIn 0.6s ease-out forwards;
+}
+
+@keyframes statSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Bounce animation for buttons */
+.button-bounce {
+    animation: buttonBounce 0.6s ease-out forwards;
+}
+
+@keyframes buttonBounce {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Perfect score special animation */
+.perfect-score {
+    position: relative;
+    overflow: hidden;
+}
+
+.perfect-score::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+    animation: perfectScoreShine 2s linear infinite;
+}
+
+@keyframes perfectScoreShine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+/* Mini celebration particles */
+@keyframes miniParticle {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--vx), var(--vy)) scale(0);
+        opacity: 0;
+    }
+}
+
 /* High contrast mode support */
 @media (prefers-contrast: high) {
     .primary-btn {
