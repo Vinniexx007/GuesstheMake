@@ -1,56 +1,111 @@
-// Car manufacturer data with high-quality embedded SVG logos
-// These are custom-designed SVG logos that will always work reliably
+// Car manufacturer data with local logo files
+// Using actual car logos from the car-logos-dataset repository
 
 const CAR_DATA = {
     'toyota': {
         name: 'Toyota',
         country: 'Japan',
-        logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNjAiIGN5PSI2MCIgcj0iNTgiIGZpbGw9IiNFRDFDMjQiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSI0Ii8+PGVsbGlwc2UgY3g9IjYwIiBjeT0iNDUiIHJ4PSIyNSIgcnk9IjE1IiBmaWxsPSIjRkZGRkZGIi8+PGVsbGlwc2UgY3g9IjQ1IiBjeT0iNzAiIHJ4PSIxNSIgcnk9IjEwIiBmaWxsPSIjRkZGRkZGIi8+PGVsbGlwc2UgY3g9Ijc1IiBjeT0iNzAiIHJ4PSIxNSIgcnk9IjEwIiBmaWxsPSIjRkZGRkZGIi8+PHRleHQgeD0iNjAiIHk9Ijk1IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjRkZGRkZGIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5UT1lPVEE8L3RleHQ+PC9zdmc+'
+        logo: 'images/logos/toyota.png'
     },
     'bmw': {
         name: 'BMW',
-        country: 'Germany', 
-        logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNjAiIGN5PSI2MCIgcj0iNTgiIGZpbGw9IiMwMDc3RDAiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSI0Ii8+PHBhdGggZD0iTTYwIDEwTDYwIDExME02MCA2MEwxMTAgNjBNNjAgNjBMMTAgNjAiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHBhdGggZD0iTTMwIDMwTDkwIDMwTDkwIDkwTDMwIDkwWiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCB4PSI2MCIgeT0iNjciIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNGRkZGRkYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkJNVzwvdGV4dD48L3N2Zz4='
+        country: 'Germany',
+        logo: 'images/logos/bmw.png'
     },
     'mercedes': {
         name: 'Mercedes-Benz',
         country: 'Germany',
-        logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNjAiIGN5PSI2MCIgcj0iNTgiIGZpbGw9IiMwMDAwMDAiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSI0Ii8+PHBhdGggZD0iTTYwIDIwTDQwIDgwTDgwIDgwWiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI0NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCB4PSI2MCIgeT0iMTA1IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjRkZGRkZGIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5NRVJDRURFUzwvdGV4dD48L3N2Zz4='
+        logo: 'images/logos/mercedes-benz.png'
     },
     'ford': {
         name: 'Ford',
         country: 'United States',
-        logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGVsbGlwc2UgY3g9IjYwIiBjeT0iNjAiIHJ4PSI1OCIgcnk9IjM1IiBmaWxsPSIjMDA2NEE3IiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iNCIvPjx0ZXh0IHg9IjYwIiB5PSI2OCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI0ZGRkZGRiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Rm9yZDwvdGV4dD48L3N2Zz4='
+        logo: 'images/logos/ford.png'
     },
     'honda': {
         name: 'Honda',
         country: 'Japan',
-        logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjExNiIgaGVpZ2h0PSI3MCIgeD0iMiIgeT0iMjUiIGZpbGw9IiNGRjAwMDAiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSI0IiByeD0iMTAiLz48dGV4dCB4PSI2MCIgeT0iNjgiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNGRkZGRkYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkhPTkRBPC90ZXh0Pjwvc3ZnPg=='
+        logo: 'images/logos/honda.png'
     },
     'volkswagen': {
         name: 'Volkswagen',
         country: 'Germany',
-        logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNjAiIGN5PSI2MCIgcj0iNTgiIGZpbGw9IiMwMEE2RkIiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSI0Ii8+PGNpcmNsZSBjeD0iNjAiIGN5PSI2MCIgcj0iNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHRleHQgeD0iNjAiIHk9IjQ1IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjRkZGRkZGIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5WPC90ZXh0Pjx0ZXh0IHg9IjYwIiB5PSI4MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI0ZGRkZGRiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+VzwvdGV4dD48L3N2Zz4='
+        logo: 'images/logos/volkswagen.png'
     },
     'audi': {
         name: 'Audi',
         country: 'Germany',
-        logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjExNiIgaGVpZ2h0PSIxMTYiIHg9IjIiIHk9IjIiIGZpbGw9IiNGRkZGRkYiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSI0IiByeD0iMTAiLz48Y2lyY2xlIGN4PSIzMCIgY3k9IjYwIiByPSIxNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjMiLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjYwIiByPSIxNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjMiLz48Y2lyY2xlIGN4PSI3MCIgY3k9IjYwIiByPSIxNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjMiLz48Y2lyY2xlIGN4PSI5MCIgY3k9IjYwIiByPSIxNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjMiLz48dGV4dCB4PSI2MCIgeT0iOTUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiMwMDAwMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkFVREk8L3RleHQ+PC9zdmc+'
+        logo: 'images/logos/audi.png'
     },
     'nissan': {
         name: 'Nissan',
         country: 'Japan',
-        logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNjAiIGN5PSI2MCIgcj0iNTgiIGZpbGw9IiNDMzAwMkYiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSI0Ii8+PGVsbGlwc2UgY3g9IjYwIiBjeT0iNjAiIHJ4PSI0MCIgcnk9IjI1IiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMyIvPjx0ZXh0IHg9IjYwIiB5PSI2OCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI0ZGRkZGRiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TklTU0FOPC90ZXh0Pjwvc3ZnPg=='
+        logo: 'images/logos/nissan.png'
     },
     'ferrari': {
         name: 'Ferrari',
         country: 'Italy',
-        logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBvbHlnb24gcG9pbnRzPSI2MCwyMCA5MCw0MCA5MCw4MCAzMCw4MCAzMCw0MCIgZmlsbD0iI0ZGRDcwMCIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjMiLz48cmVjdCB3aWR0aD0iMjAiIGhlaWdodD0iMzAiIHg9IjUwIiB5PSI0NSIgZmlsbD0iI0ZGMDAwMCIvPjx0ZXh0IHg9IjYwIiB5PSI5NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RkVSUkFSSTwvdGV4dD48L3N2Zz4='
+        logo: 'images/logos/ferrari.png'
     },
     'lamborghini': {
         name: 'Lamborghini',
         country: 'Italy',
-        logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBvbHlnb24gcG9pbnRzPSI2MCwxNSA5NSw0MCA5NSw4NSAyNSw4NSAyNSw0MCIgZmlsbD0iI0ZGRDcwMCIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjMiLz48cGF0aCBkPSJNNDUgNDBMNzUgNDBNNDUgNTVMNzUgNTVNNDUgNzBMNzUgNzAiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgeD0iNjAiIHk9IjEwNSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TEFNQk9SR0hJTkk8L3RleHQ+PC9zdmc+'
+        logo: 'images/logos/lamborghini.png'
+    },
+    'porsche': {
+        name: 'Porsche',
+        country: 'Germany',
+        logo: 'images/logos/porsche.png'
+    },
+    'jaguar': {
+        name: 'Jaguar',
+        country: 'United Kingdom',
+        logo: 'images/logos/jaguar.png'
+    },
+    'volvo': {
+        name: 'Volvo',
+        country: 'Sweden',
+        logo: 'images/logos/volvo.png'
+    },
+    'tesla': {
+        name: 'Tesla',
+        country: 'United States',
+        logo: 'images/logos/tesla.png'
+    },
+    'mazda': {
+        name: 'Mazda',
+        country: 'Japan',
+        logo: 'images/logos/mazda.png'
+    },
+    'hyundai': {
+        name: 'Hyundai',
+        country: 'South Korea',
+        logo: 'images/logos/hyundai.png'
+    },
+    'kia': {
+        name: 'Kia',
+        country: 'South Korea',
+        logo: 'images/logos/kia.png'
+    },
+    'peugeot': {
+        name: 'Peugeot',
+        country: 'France',
+        logo: 'images/logos/peugeot.png'
+    },
+    'renault': {
+        name: 'Renault',
+        country: 'France',
+        logo: 'images/logos/renault.png'
+    },
+    'chevrolet': {
+        name: 'Chevrolet',
+        country: 'United States',
+        logo: 'images/logos/chevrolet.png'
+    },
+    'lexus': {
+        name: 'Lexus',
+        country: 'Japan',
+        logo: 'images/logos/lexus.png'
     }
 ,
     'porsche': {
