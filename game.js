@@ -224,10 +224,71 @@ class CarLogoQuiz {
         const question = this.gameState.currentQuestion;
         const carData = CAR_DATA[question.brand];
         
-        // Update logo - embedded SVGs will load instantly
-        this.elements.logoImage.src = carData.logo;
-        this.elements.logoImage.alt = `${carData.name} logo`;
-        this.elements.logoImage.style.display = 'block';
+        // Update logo with robust error handling
+        const logoImg = this.elements.logoImage;
+        const logoContainer = logoImg.parentElement;
+        
+        // Clear any existing fallback content
+        const existingFallback = logoContainer.querySelector('.logo-fallback');
+        if (existingFallback) {
+            existingFallback.remove();
+        }
+        
+        // Show loading state
+        logoImg.style.display = 'none';
+        
+        // Create fallback element
+        const fallbackDiv = document.createElement('div');
+        fallbackDiv.className = 'logo-fallback';
+        fallbackDiv.innerHTML = `
+            <div style="
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 2rem;
+                border-radius: 12px;
+                text-align: center;
+                min-height: 120px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            ">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚗</div>
+                <h3 style="margin: 0; font-size: 1.2rem; font-weight: bold;">${carData.name}</h3>
+                <p style="margin: 0.25rem 0 0 0; font-size: 0.9rem; opacity: 0.9;">Guess the country!</p>
+            </div>
+        `;
+        
+        // Try to load the actual logo
+        const testImg = new Image();
+        testImg.onload = () => {
+            // Success - show the real logo
+            logoImg.src = testImg.src;
+            logoImg.alt = `${carData.name} logo`;
+            logoImg.style.display = 'block';
+            if (fallbackDiv.parentNode) {
+                fallbackDiv.remove();
+            }
+        };
+        
+        testImg.onerror = () => {
+            // Failed - show fallback
+            logoImg.style.display = 'none';
+            if (!logoContainer.querySelector('.logo-fallback')) {
+                logoContainer.appendChild(fallbackDiv);
+            }
+        };
+        
+        // Set a timeout in case the image takes too long
+        setTimeout(() => {
+            if (logoImg.style.display === 'none' && !logoContainer.querySelector('.logo-fallback')) {
+                logoContainer.appendChild(fallbackDiv);
+            }
+        }, 3000);
+        
+        // Start loading
+        testImg.src = carData.logo;
         
         // Update answer buttons
         this.elements.answerBtns.forEach((btn, index) => {
