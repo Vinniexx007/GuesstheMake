@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Logo Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Home Screen -->
+        <div id="home-screen" class="screen active">
+            <div class="container">
+                <h1 class="title">🏎️ Car Logo Quiz</h1>
+                <p class="subtitle">Test your knowledge of car manufacturers!</p>
+                
+                <div class="stats-card">
+                    <div class="stat">
+                        <span class="stat-label">Best Score</span>
+                        <span id="best-score" class="stat-value">0</span>
+                    </div>
+                </div>
+                
+                <div class="instructions">
+                    <h3>How to Play:</h3>
+                    <ul>
+                        <li>Identify the car manufacturer's country</li>
+                        <li>You have 5 seconds per question</li>
+                        <li>15 questions total</li>
+                        <li>Speed bonus for quick answers!</li>
+                    </ul>
+                </div>
+                
+                <button id="start-btn" class="primary-btn">Start Quiz</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="container">
+                <div class="game-header">
+                    <div class="round-counter">
+                        <span id="current-round">1</span>/<span id="total-rounds">15</span>
+                    </div>
+                    <div class="score">
+                        Score: <span id="current-score">0</span>
+                    </div>
+                </div>
+                
+                <div class="timer-container">
+                    <div id="timer-bar" class="timer-bar"></div>
+                </div>
+                
+                <div class="logo-container">
+                    <img id="logo-image" src="" alt="Car Logo" class="logo-image">
+                </div>
+                
+                <div class="question">
+                    <h2>Which country is this manufacturer from?</h2>
+                </div>
+                
+                <div class="answers">
+                    <button class="answer-btn" data-country="">Country 1</button>
+                    <button class="answer-btn" data-country="">Country 2</button>
+                    <button class="answer-btn" data-country="">Country 3</button>
+                </div>
+                
+                <div id="streak-indicator" class="streak-indicator hidden">
+                    🔥 <span id="streak-count">0</span> streak!
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="container">
+                <h1 class="title">Quiz Complete! 🎉</h1>
+                
+                <div class="results-stats">
+                    <div class="stat-card">
+                        <div class="stat-large">
+                            <span class="stat-label">Final Score</span>
+                            <span id="final-score" class="stat-value">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div class="stat">
+                            <span class="stat-label">Accuracy</span>
+                            <span id="accuracy" class="stat-value">0%</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Best Score</span>
+                            <span id="results-best-score" class="stat-value">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Correct</span>
+                            <span id="correct-answers" class="stat-value">0/15</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Max Streak</span>
+                            <span id="max-streak" class="stat-value">0</span>
+                        </div>
+                    </div>
+                    
+                    <div id="new-record" class="new-record hidden">
+                        🏆 New Best Score!
+                    </div>
+                </div>
+                
+                <div class="results-actions">
+                    <button id="play-again-btn" class="primary-btn">Play Again</button>
+                    <button id="share-btn" class="secondary-btn">Share Score</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="carData.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
