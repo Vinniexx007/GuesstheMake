@@ -60,7 +60,7 @@ const CAR_DATA = {
     'jaguar': {
         name: 'Jaguar',
         country: 'United Kingdom',
-        logo: 'images/logos/jaguar.png'
+        logo: 'images/logos/jaguar.svg'
     },
     'volvo': {
         name: 'Volvo',
@@ -80,7 +80,7 @@ const CAR_DATA = {
     'hyundai': {
         name: 'Hyundai',
         country: 'South Korea',
-        logo: 'images/logos/hyundai.png'
+        logo: 'images/logos/hyundai.svg'
     },
     'kia': {
         name: 'Kia',
@@ -95,7 +95,7 @@ const CAR_DATA = {
     'renault': {
         name: 'Renault',
         country: 'France',
-        logo: 'images/logos/renault.png'
+        logo: 'images/logos/renault.svg'
     },
     'chevrolet': {
         name: 'Chevrolet',

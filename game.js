@@ -224,10 +224,26 @@ class CarLogoQuiz {
         const question = this.gameState.currentQuestion;
         const carData = CAR_DATA[question.brand];
         
-        // Update logo - these are embedded SVGs so they'll always work
-        this.elements.logoImage.src = carData.logo;
-        this.elements.logoImage.alt = `${carData.name} logo`;
-        this.elements.logoImage.style.display = 'block';
+        // Update logo with fallback handling
+        const logoImg = this.elements.logoImage;
+        const logoContainer = logoImg.parentElement;
+        
+        // Clear any existing fallback
+        const existingFallback = logoContainer.querySelector('.logo-fallback');
+        if (existingFallback) {
+            existingFallback.remove();
+        }
+        
+        // Try to load the logo
+        logoImg.src = carData.logo;
+        logoImg.alt = `${carData.name} logo`;
+        logoImg.style.display = 'block';
+        
+        // Add error handling in case it fails
+        logoImg.onerror = () => {
+            this.showLogoFallback(carData, logoContainer);
+            logoImg.style.display = 'none';
+        };
         
         // Update answer buttons
         this.elements.answerBtns.forEach((btn, index) => {
@@ -236,6 +252,32 @@ class CarLogoQuiz {
             btn.classList.remove('correct', 'incorrect');
             btn.disabled = false;
         });
+    }
+
+    showLogoFallback(carData, logoContainer) {
+        const fallbackDiv = document.createElement('div');
+        fallbackDiv.className = 'logo-fallback';
+        fallbackDiv.innerHTML = `
+            <div style="
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 2rem;
+                border-radius: 12px;
+                text-align: center;
+                min-height: 120px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                font-family: 'Inter', -apple-system, sans-serif;
+            ">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🚗</div>
+                <h3 style="margin: 0; font-size: 1.3rem; font-weight: bold; letter-spacing: 0.05em;">${carData.name}</h3>
+                <p style="margin: 0.25rem 0 0 0; font-size: 0.9rem; opacity: 0.9;">Guess the country!</p>
+            </div>
+        `;
+        logoContainer.appendChild(fallbackDiv);
     }
 
     startTimer() {
