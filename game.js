@@ -224,9 +224,10 @@ class CarLogoQuiz {
         const question = this.gameState.currentQuestion;
         const carData = CAR_DATA[question.brand];
         
-        // Update logo
+        // Update logo - embedded SVGs will load instantly
         this.elements.logoImage.src = carData.logo;
         this.elements.logoImage.alt = `${carData.name} logo`;
+        this.elements.logoImage.style.display = 'block';
         
         // Update answer buttons
         this.elements.answerBtns.forEach((btn, index) => {
